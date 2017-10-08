@@ -236,17 +236,12 @@ function initEvents() {
     var progsive = document.getElementById("progsive");
     var volbox = document.getElementById('volbox');
 
-    oAudio.loop = true;
+    // oAudio.loop = true;
 
     oAudio.addEventListener("ratechange", function () {
         rateDisplay.innerHTML = oAudio.playbackRate;
     }, false);
 
-
-    oAudio.addEventListener("canplay", function () {
-        var oAudio = document.getElementById('myaudio');
-        oAudio.play();
-    }, false);
     var wasPlaying; // set this to true sometime if playing 
     var leaving = false;
 
