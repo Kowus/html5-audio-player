@@ -165,13 +165,13 @@
                 <button onclick="rewindAudio()" class="btn btn-default" id="rewind">
                     <i class="glyphicon glyphicon-fast-backward"></i>
                 </button>
-                <button onclick="decreaseSpeed()" class="btn btn-default" id="rewind">
+                <button onclick="decreaseSpeed()" class="btn btn-default" id="decrease">
                     <i class="glyphicon glyphicon-backward"></i>
                 </button>
                 <button onclick="restartAudio();" class="btn btn-default" id="restart">
                     Restart
                 </button>
-                <button onclick="increaseSpeed()" class="btn btn-default" id="rewind">
+                <button onclick="increaseSpeed()" class="btn btn-default" id="increase">
                     <i class="glyphicon glyphicon-forward"></i>
                 </button>
                 <button onclick="forwardAudio();" class="btn btn-default" id="forward">
@@ -193,11 +193,15 @@
     <!-- jQuery -->
     <script type="text/javascript">
         //Check for support and enable buttons
+        // play stop rewind decrease restart increase forward
         if (window.HTMLAudioElement) {
             document.getElementById("play").disabled = false;
+            document.getElementById("stop").disabled = false;
             document.getElementById("rewind").disabled = false;
+            document.getElementById("decrease").disabled = false;
             document.getElementById("forward").disabled = false;
             document.getElementById("restart").disabled = false;
+            document.getElementById("increase").disabled = false;
         }
     </script>
     <script src="js/jquery.js"></script>

@@ -1,7 +1,6 @@
 var currentFile = "";
 var volChg = .02;
 
-
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
     var elapsedTime = Math.round(oAudio.currentTime);
@@ -244,7 +243,10 @@ function initEvents() {
     }, false);
 
 
-
+    oAudio.addEventListener("canplay", function () {
+        var oAudio = document.getElementById('myaudio');
+        oAudio.play();
+    }, false);
     var wasPlaying; // set this to true sometime if playing 
     var leaving = false;
 
@@ -292,20 +294,7 @@ function initEvents() {
     oAudio.addEventListener("playing", volumeBar, true);
     oAudio.addEventListener("paused", volumeBar, true);
     oAudio.addEventListener("volumechange", volumeBar, true);
-    /*
-     canvas2.addEventListener("click", function (e) {
-         var oAudio = document.getElementById('myaudio');
-         var canvas2 = document.getElementById('canvas2');
- 
-         if (!e) {
-             e = window.event;
-         } try {
-             oAudio.volume = 1 - (e.offsetY / canvas2.clientHeight);
-         } catch (err) {
-             catcher(err);
-         }
-     });
-     */
+
     volbox.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
         var volbox = document.getElementById('volbox');
