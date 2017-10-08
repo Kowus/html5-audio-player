@@ -69,7 +69,7 @@ function rewindAudio() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            oAudio.currentTime -= 30.0;
+            oAudio.currentTime -= 10.0;
         } catch (e) {
             catcher(e);
         }
@@ -81,7 +81,7 @@ function forwardAudio() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            oAudio.currentTime += 30.0;
+            oAudio.currentTime += 10.0;
         } catch (e) {
             catcher(e);
         }
@@ -169,6 +169,11 @@ function handleKey(e) {
         case 40:
             decreaseVolume();
             e.preventDefault();
+            break;
+        // r key
+        case 82:
+            restartAudio();
+            e.preventDefault()
             break;
         default:
             console.log(e.keyCode);
