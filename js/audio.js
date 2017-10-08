@@ -21,15 +21,17 @@ function progressBar() {
 }
 function volumeBar() {
     var oAudio = document.getElementById('myaudio');
-    console.log(oAudio.volume);
+    // console.log(oAudio.volume);
     var canvas2 = document.getElementById("canvas2");
     if (canvas2.getContext) {
         var ctx2 = canvas2.getContext('2d');
         ctx2.clearRect(0, 0, canvas2.clientWidth, canvas2.clientHeight);
         ctx2.fillStyle = "rgb(200, 10, 84)";
-        var vol = (oAudio.volume / 1) * canvas2.clientHeight;
+        var vol = Math.round(100 - ((oAudio.volume / 1) * (1 / canvas2.clientHeight)) * 10000) - 5;
         if (vol > 0) {
-            ctx2.fillRect(0, 0, canvas2.clientWidth, vol);
+            console.log(vol)
+            // ctx2.fillRect(0, 0, canvas2.clientWidth, vol);
+            ctx2.fillRect(0, vol, canvas2.clientWidth, canvas2.clientHeight);
         }
     }
 }
@@ -51,7 +53,7 @@ function playAudio() {
             // Tests the paused attribute and set state.
             if (oAudio.paused) {
                 oAudio.play();
-                btn.innerHTML = '<i class="fa fa-pause"></i> Pause';
+                btn.innerHTML = '<i class="glyphicon glyphicon-pause"></i>';
             }
             else {
                 oAudio.pause();
@@ -68,7 +70,7 @@ function rewindAudio() {
     // Check audio element support
     if (window.HTMLAudioElement) {
         try {
-            var audio = document.getElementById('myaudio');
+            var oAudio = document.getElementById('myaudio');
             oAudio.currentTime -= 30.0;
         } catch (e) {
             catcher(e);
@@ -100,18 +102,74 @@ function restartAudio() {
     }
 }
 
+function stopAudio() {
+    // Check for audio element support
+    if (window.HTMLAudioElement) {
+        try {
+            var oAudio = document.getElementById('myaudio');
+            oAudio.currentTime = 0;
+            oAudio.pause();
+        } catch (e) {
+            catcher(e);
+        }
+    }
+}
+
+function muteAudio() {
+    // Check for Audio element support
+    if (window.HTMLAudioElement) {
+        try {
+            var oAudio = document.getElementById('myaudio');
+            if (oAudio.volume > 0) {
+                // Mute
+            }
+        } catch (e) {
+            catcher(e);
+        }
+    }
+}
 
 function initEvents() {
     var canvas = document.getElementById('canvas');
     var oAudio = document.getElementById('myaudio');
     var canvas2 = document.getElementById('canvas2');
 
+
+
+    var wasPlaying; // set this to true sometime if playing 
+    var leaving = false;
+
+    window.addEventListener("blur", function () {
+        leaving = true;
+        if (wasPlaying) {
+            oAudio.pause();
+        }
+    }, false);
+
+    window.addEventListener("focus", function () {
+        if (wasPlaying == true) {
+            oAudio.play();
+        }
+        leaving = false;
+    }, false);
+
+    oAudio.addEventListener("play", function () {
+        wasPlaying = true;
+    }, false);
+
+    oAudio.addEventListener("pause", function () {
+        if (!leaving) {
+            wasPlaying = false;
+        }
+    }, false);
+
+
     // Toggle play button text while playing/paused
     oAudio.addEventListener("playing", function () {
-        document.getElementById('play').innerHTML = '<i class="fa fa-pause"></i> Pause';
+        document.getElementById('play').innerHTML = '<i class="glyphicon glyphicon-pause"></i>';
     }, true);
     oAudio.addEventListener("pause", function () {
-        document.getElementById("play").innerHTML = '<i class="fa fa-play"></i> Play';
+        document.getElementById("play").innerHTML = '<i class="glyphicon glyphicon-play"></i>';
     }, true);
 
 
@@ -129,7 +187,7 @@ function initEvents() {
         if (!e) {
             e = window.event;
         } try {
-            oAudio.volume = (e.offsetY / canvas2.clientHeight);
+            oAudio.volume = 1 - (e.offsetY / canvas2.clientHeight);
         } catch (err) {
             catcher(err);
         }
@@ -143,7 +201,7 @@ function initEvents() {
             e = window.event;
         } try {
             // Get current time based on position of mouse in the canvas box
-            oAudio.currentTime = oAudio.duration * (e.offsetX / canvas.clientWidth);
+            oAudio.currentTime = oAudio.duration * (e.offsetX - 10 / canvas.clientWidth);
         } catch (err) {
             catcher(err);
         }
