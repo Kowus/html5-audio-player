@@ -1,5 +1,5 @@
 var currentFile = "";
-
+var volChg = .01;
 
 
 function progressBar() {
@@ -117,10 +117,10 @@ function decreaseVolume() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            if (oAudio.volume < .05) {
+            if (oAudio.volume < volChg) {
                 oAudio.volume = 0;
             } else {
-                oAudio.volume -= .05;
+                oAudio.volume -= volChg;
             }
         } catch (e) {
             catcher(e);
@@ -132,10 +132,10 @@ function increaseVolume() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            if (oAudio.volume > .95) {
+            if (oAudio.volume > (1 - volChg)) {
                 oAudio.volume = 1;
             } else {
-                oAudio.volume += .05;
+                oAudio.volume += volChg;
             }
         } catch (e) {
             catcher(e);
