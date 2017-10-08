@@ -55,7 +55,10 @@
 
         // Increment playbackRate by 1 
         function increaseSpeed() {
-            audioElm.playbackRate += 1;
+            if (audioElm.playbackRate < 1) {
+                audioElm.playbackRate *= 2;
+            } else
+                audioElm.playbackRate += .5;
         }
 
         // Cut playback rate in half
@@ -64,7 +67,7 @@
                 var temp = audioElm.playbackRate;
                 audioElm.playbackRate = (temp / 2);
             } else {
-                audioElm.playbackRate -= 1;
+                audioElm.playbackRate -= .5;
             }
         }
 

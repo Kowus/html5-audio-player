@@ -98,13 +98,40 @@
                     </kbd>
                 </p>
             </li>
+            <li class="list-group-item">
+                <p>Decrease playback speed
+                    <kbd class="pull-right">
+                        &lt;
+                    </kbd>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <p>Increase playback speed
+                    <kbd class="pull-right">
+                        &gt;
+                    </kbd>
+                </p>
+            </li>
+            <li class="list-group-item text-center">
+                <h4>
+                    Music will pause as soon as you leave the browser.
+                </h4>
+            </li>
         </ul>
 
         <hr class="featurette-divider">
 
-        <div class="panel panel-default" id="media-panel">
+        <div class="panel panel-warning" id="media-panel">
             <div class="panel-heading">
-                <input class="form-control" id="audiofile" size="80" value="mans-not-hot.mp3" readonly>
+                <div class="input-group">
+                    <input class="form-control" id="audiofile" size="80" value="mans-not-hot.mp3" readonly>
+                    <span class="input-group-addon" style="background-color:white">
+                        Volume:
+                        <span class="badge bg-info" id="volume">100%
+                        </span>
+                    </span>
+                </div>
+
 
             </div>
             <div class="panel-body text-center" id="panel-body">
@@ -121,8 +148,14 @@
                 <button onclick="rewindAudio()" class="btn btn-default" id="rewind">
                     <i class="glyphicon glyphicon-fast-backward"></i>
                 </button>
+                <button onclick="decreaseSpeed()" class="btn btn-default" id="rewind">
+                    <i class="glyphicon glyphicon-backward"></i>
+                </button>
                 <button onclick="restartAudio();" class="btn btn-default" id="restart">
                     Restart
+                </button>
+                <button onclick="increaseSpeed()" class="btn btn-default" id="rewind">
+                    <i class="glyphicon glyphicon-forward"></i>
                 </button>
                 <button onclick="forwardAudio();" class="btn btn-default" id="forward">
                     <i class="glyphicon glyphicon-fast-forward"></i>

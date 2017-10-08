@@ -1,5 +1,5 @@
 var currentFile = "";
-var volChg = .01;
+var volChg = .02;
 
 
 function progressBar() {
@@ -21,6 +21,8 @@ function progressBar() {
 }
 function volumeBar() {
     var oAudio = document.getElementById('myaudio');
+    var disVol = document.getElementById('volume');
+    disVol.innerHTML = Math.round(oAudio.volume * 100) + "%";
     // console.log(oAudio.volume);
     var canvas2 = document.getElementById("canvas2");
     if (canvas2.getContext) {
@@ -32,6 +34,7 @@ function volumeBar() {
             ctx2.fillRect(0, vol, canvas2.clientWidth, canvas2.clientHeight);
         }
     }
+
 }
 
 function playAudio() {
@@ -143,6 +146,24 @@ function increaseVolume() {
     }
 }
 
+function increaseSpeed() {
+    var oAudio = document.getElementById('myaudio');
+    if (oAudio.playbackRate < 1) {
+        oAudio.playbackRate *= 2;
+    } else
+        oAudio.playbackRate += .5;
+}
+
+function decreaseSpeed() {
+    var oAudio = document.getElementById('myaudio');
+    if (oAudio.playbackRate <= 1) {
+        var temp = oAudio.playbackRate;
+        oAudio.playbackRate = (temp / 2);
+    } else {
+        oAudio.playbackRate -= .5;
+    }
+}
+
 function handleKey(e) {
     switch (e.keyCode) {
         // Spacebar
@@ -178,6 +199,16 @@ function handleKey(e) {
         // s key
         case 83:
             stopAudio();
+            e.preventDefault()
+            break;
+        // > key
+        case 190:
+            increaseSpeed();
+            e.preventDefault()
+            break;
+        // < key
+        case 188:
+            decreaseSpeed();
             e.preventDefault()
             break;
         default:
