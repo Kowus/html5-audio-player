@@ -224,6 +224,11 @@ function initEvents() {
     var canvas = document.getElementById('canvas');
     var oAudio = document.getElementById('myaudio');
     var canvas2 = document.getElementById('canvas2');
+    var rateDisplay = document.getElementById("rate");
+
+    oAudio.addEventListener("ratechange", function () {
+        rateDisplay.innerHTML = oAudio.playbackRate;
+    }, false);
 
 
 
