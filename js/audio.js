@@ -117,10 +117,10 @@ function decreaseVolume() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            if (oAudio.volume < .1) {
+            if (oAudio.volume < .05) {
                 oAudio.volume = 0;
             } else {
-                oAudio.volume -= .1;
+                oAudio.volume -= .05;
             }
         } catch (e) {
             catcher(e);
@@ -132,10 +132,10 @@ function increaseVolume() {
     if (window.HTMLAudioElement) {
         try {
             var oAudio = document.getElementById('myaudio');
-            if (oAudio.volume > .9) {
+            if (oAudio.volume > .95) {
                 oAudio.volume = 1;
             } else {
-                oAudio.volume += .1;
+                oAudio.volume += .05;
             }
         } catch (e) {
             catcher(e);
