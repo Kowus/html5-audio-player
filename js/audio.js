@@ -51,11 +51,11 @@ function playAudio() {
             // Tests the paused attribute and set state.
             if (oAudio.paused) {
                 oAudio.play();
-                btn.textContent = "Pause";
+                btn.innerHTML = '<i class="fa fa-pause"></i> Pause';
             }
             else {
                 oAudio.pause();
-                btn.textContent = "Play"
+                btn.innerHTML = '<i class="fa fa-play"></i> Play';
             }
         } catch (e) {
             catcher(e)
@@ -108,10 +108,10 @@ function initEvents() {
 
     // Toggle play button text while playing/paused
     oAudio.addEventListener("playing", function () {
-        document.getElementById('play').textContent = "Pause";
+        document.getElementById('play').innerHTML = '<i class="fa fa-pause"></i> Pause';
     }, true);
     oAudio.addEventListener("pause", function () {
-        document.getElementById("play").textContent = "Play";
+        document.getElementById("play").innerHTML = '<i class="fa fa-play"></i> Play';
     }, true);
 
 
