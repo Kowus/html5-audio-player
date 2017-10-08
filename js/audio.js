@@ -7,37 +7,42 @@ function progressBar() {
     var elapsedTime = Math.round(oAudio.currentTime);
     var prog = document.getElementById("progress");
     var pWidth = (elapsedTime / oAudio.duration) * 100;
-    prog.value = pWidth;
+    // prog.value = pWidth;
+    prog.style.width = pWidth + "%"
 
-
-
-    if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-        ctx.fillStyle = "rgb(255, 0, 0)";
-        var fWidth = (elapsedTime / oAudio.duration) * canvas.clientWidth;
-        if (fWidth > 0) {
-            ctx.fillRect(0, 0, fWidth, canvas.clientHeight);
+    /*
+    
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+            ctx.fillStyle = "rgb(255, 0, 0)";
+            var fWidth = (elapsedTime / oAudio.duration) * canvas.clientWidth;
+            if (fWidth > 0) {
+                ctx.fillRect(0, 0, fWidth, canvas.clientHeight);
+            }
         }
-    }
-
+    */
 }
 function volumeBar() {
     var oAudio = document.getElementById('myaudio');
     var disVol = document.getElementById('volume');
-    disVol.innerHTML = Math.round(oAudio.volume * 100) + "%";
+    var volbar = document.getElementById('volbar');
+    var currVol = Math.round(oAudio.volume * 100) + "%";
+    volbar.style.height = currVol;
+    disVol.innerHTML = currVol;
     // console.log(oAudio.volume);
-    var canvas2 = document.getElementById("canvas2");
-    if (canvas2.getContext) {
-        var ctx2 = canvas2.getContext('2d');
-        ctx2.clearRect(0, 0, canvas2.clientWidth, canvas2.clientHeight);
-        ctx2.fillStyle = "rgb(200, 10, 84)";
-        var vol = Math.round(100 - ((oAudio.volume / 1) * (1 / canvas2.clientHeight)) * 10000) - 5;
-        if (vol > 0) {
-            ctx2.fillRect(0, vol, canvas2.clientWidth, canvas2.clientHeight);
+    /*
+        var canvas2 = document.getElementById("canvas2");
+        if (canvas2.getContext) {
+            var ctx2 = canvas2.getContext('2d');
+            ctx2.clearRect(0, 0, canvas2.clientWidth, canvas2.clientHeight);
+            ctx2.fillStyle = "rgb(200, 10, 84)";
+            var vol = Math.round(100 - ((oAudio.volume / 1) * (1 / canvas2.clientHeight)) * 10000) - 5;
+            if (vol > 0) {
+                ctx2.fillRect(0, vol, canvas2.clientWidth, canvas2.clientHeight);
+            }
         }
-    }
-
+    */
 }
 
 function playAudio() {
@@ -224,11 +229,13 @@ function handleKey(e) {
 
 
 function initEvents() {
-    var canvas = document.getElementById('canvas');
+    // var canvas = document.getElementById('canvas');
     var oAudio = document.getElementById('myaudio');
-    var canvas2 = document.getElementById('canvas2');
+    // var canvas2 = document.getElementById('canvas2');
     var rateDisplay = document.getElementById("rate");
     var prog = document.getElementById("progress");
+    var progsive = document.getElementById("progsive");
+    var volbox = document.getElementById('volbox');
 
     oAudio.addEventListener("ratechange", function () {
         rateDisplay.innerHTML = oAudio.playbackRate;
@@ -283,19 +290,33 @@ function initEvents() {
     oAudio.addEventListener("playing", volumeBar, true);
     oAudio.addEventListener("paused", volumeBar, true);
     oAudio.addEventListener("volumechange", volumeBar, true);
-    canvas2.addEventListener("click", function (e) {
+    /*
+     canvas2.addEventListener("click", function (e) {
+         var oAudio = document.getElementById('myaudio');
+         var canvas2 = document.getElementById('canvas2');
+ 
+         if (!e) {
+             e = window.event;
+         } try {
+             oAudio.volume = 1 - (e.offsetY / canvas2.clientHeight);
+         } catch (err) {
+             catcher(err);
+         }
+     });
+     */
+    volbox.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
-        var canvas2 = document.getElementById('canvas2');
-
+        var volbox = document.getElementById('volbox');
         if (!e) {
             e = window.event;
         } try {
-            oAudio.volume = 1 - (e.offsetY / canvas2.clientHeight);
+            oAudio.volume = (e.offsetY / volbox.offsetHeight)
         } catch (err) {
             catcher(err);
         }
-    })
+    });
     // control audio on mouse click
+    /*
     canvas.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
         var canvas = document.getElementById('canvas');
@@ -308,15 +329,14 @@ function initEvents() {
         } catch (err) {
             catcher(err);
         }
-    }, true);
-    prog.addEventListener("click", function (e) {
+    }, true);*/
+    progsive.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
-        var prog = document.getElementById('progress');
-
+        var progsive = document.getElementById('progsive');
         if (!e) {
             e = window.event;
         } try {
-            oAudio.currentTime = oAudio.duration * (e.offsetX / prog.offsetWidth)
+            oAudio.currentTime = oAudio.duration * (e.offsetX / progsive.offsetWidth)
         } catch (err) {
             catcher(err);
         }
