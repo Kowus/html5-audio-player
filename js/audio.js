@@ -6,6 +6,8 @@ function progressBar() {
     var oAudio = document.getElementById('myaudio');
     var elapsedTime = Math.round(oAudio.currentTime);
 
+
+
     if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
@@ -13,6 +15,21 @@ function progressBar() {
         var fWidth = (elapsedTime / oAudio.duration) * canvas.clientWidth;
         if (fWidth > 0) {
             ctx.fillRect(0, 0, fWidth, canvas.clientHeight);
+        }
+    }
+
+}
+function volumeBar() {
+    var oAudio = document.getElementById('myaudio');
+    console.log(oAudio.volume);
+    var canvas2 = document.getElementById("canvas2");
+    if (canvas2.getContext) {
+        var ctx2 = canvas2.getContext('2d');
+        ctx2.clearRect(0, 0, canvas2.clientWidth, canvas2.clientHeight);
+        ctx2.fillStyle = "rgb(200, 10, 84)";
+        var vol = (oAudio.volume / 1) * canvas2.clientHeight;
+        if (vol > 0) {
+            ctx2.fillRect(0, 0, canvas2.clientWidth, vol);
         }
     }
 }
@@ -87,6 +104,7 @@ function restartAudio() {
 function initEvents() {
     var canvas = document.getElementById('canvas');
     var oAudio = document.getElementById('myaudio');
+    var canvas2 = document.getElementById('canvas2');
 
     // Toggle play button text while playing/paused
     oAudio.addEventListener("playing", function () {
@@ -96,9 +114,26 @@ function initEvents() {
         document.getElementById("play").textContent = "Play";
     }, true);
 
+
     // update progress bar
     oAudio.addEventListener("timeupdate", progressBar, true);
 
+    oAudio.addEventListener("timeupdate", volumeBar, true);
+    oAudio.addEventListener("playing", volumeBar, true);
+    oAudio.addEventListener("paused", volumeBar, true);
+    oAudio.addEventListener("volumechange", volumeBar, true);
+    canvas2.addEventListener("click", function (e) {
+        var oAudio = document.getElementById('myaudio');
+        var canvas2 = document.getElementById('canvas2');
+
+        if (!e) {
+            e = window.event;
+        } try {
+            oAudio.volume = (e.offsetY / canvas2.clientHeight);
+        } catch (err) {
+            catcher(err);
+        }
+    })
     // control audio on mouse click
     canvas.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
@@ -113,6 +148,8 @@ function initEvents() {
             catcher(err);
         }
     }, true);
+
+
 }
 
 window.addEventListener("DOMContentLoaded", initEvents, false);
