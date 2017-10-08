@@ -5,6 +5,9 @@ var volChg = .02;
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
     var elapsedTime = Math.round(oAudio.currentTime);
+    var prog = document.getElementById("progress");
+    var pWidth = (elapsedTime / oAudio.duration) * 100;
+    prog.value = pWidth;
 
 
 
@@ -225,6 +228,7 @@ function initEvents() {
     var oAudio = document.getElementById('myaudio');
     var canvas2 = document.getElementById('canvas2');
     var rateDisplay = document.getElementById("rate");
+    var prog = document.getElementById("progress");
 
     oAudio.addEventListener("ratechange", function () {
         rateDisplay.innerHTML = oAudio.playbackRate;
@@ -301,6 +305,18 @@ function initEvents() {
         } try {
             // Get current time based on position of mouse in the canvas box
             oAudio.currentTime = oAudio.duration * (e.offsetX / canvas.clientWidth);
+        } catch (err) {
+            catcher(err);
+        }
+    }, true);
+    prog.addEventListener("click", function (e) {
+        var oAudio = document.getElementById('myaudio');
+        var prog = document.getElementById('progress');
+
+        if (!e) {
+            e = window.event;
+        } try {
+            oAudio.currentTime = oAudio.duration * (e.offsetX / prog.offsetWidth)
         } catch (err) {
             catcher(err);
         }
