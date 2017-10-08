@@ -66,21 +66,21 @@
 
         <hr class="featurette-divider">
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="media-panel">
             <div class="panel-heading">
-                <canvas id="canvas" width="20" height="100">Canvas not supported</canvas>
-                <canvas id="canvas" width="500" height="20">Canvas not supported</canvas>
-            </div>
-            <div class="panel-body">
                 <input class="form-control" id="audiofile" size="80" value="mans-not-hot.mp3" readonly>
+
+            </div>
+            <div class="panel-body text-center" id="panel-body">
+                <canvas id="canvas" width="610" height="20">Canvas not supported</canvas>
             </div>
             <div class="panel-footer">
                 <button class="btn btn-default" id="play" onclick="playAudio()">Play</button>
-                <button onclick="rewindAudio()" class="btn btn-default">Rewind</button>
-                <button onclick="forwardAudio();" class="btn btn-default">
+                <button onclick="rewindAudio()" class="btn btn-default" id="rewind">Rewind</button>
+                <button onclick="forwardAudio();" class="btn btn-default" id="forward">
                     Fast forward
                 </button>
-                <button onclick="restartAudio();" class="btn btn-default">
+                <button onclick="restartAudio();" class="btn btn-default" id="restart">
                     Restart
                 </button>
             </div>
@@ -94,8 +94,16 @@
     <!-- /.container -->
 
     <!-- jQuery -->
+    <script type="text/javascript">
+        //Check for support and enable buttons
+        if (window.HTMLAudioElement) {
+            document.getElementById("play").disabled = false;
+            document.getElementById("rewind").disabled = false;
+            document.getElementById("forward").disabled = false;
+            document.getElementById("restart").disabled = false;
+        }
+    </script>
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/audio.js"></script>

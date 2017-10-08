@@ -1,5 +1,5 @@
-
 var currentFile = "";
+
 
 
 function progressBar() {
