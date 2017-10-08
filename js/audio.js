@@ -104,6 +104,9 @@ function restartAudio() {
         try {
             var oAudio = document.getElementById('myaudio');
             oAudio.currentTime = 0;
+            if (!oAudio.playing) {
+                oAudio.play();
+            }
         } catch (e) {
             catcher(e);
         }
