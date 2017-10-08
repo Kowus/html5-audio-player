@@ -237,6 +237,8 @@ function initEvents() {
     var progsive = document.getElementById("progsive");
     var volbox = document.getElementById('volbox');
 
+    oAudio.loop = true;
+
     oAudio.addEventListener("ratechange", function () {
         rateDisplay.innerHTML = oAudio.playbackRate;
     }, false);
@@ -315,21 +317,7 @@ function initEvents() {
             catcher(err);
         }
     });
-    // control audio on mouse click
-    /*
-    canvas.addEventListener("click", function (e) {
-        var oAudio = document.getElementById('myaudio');
-        var canvas = document.getElementById('canvas');
 
-        if (!e) {
-            e = window.event;
-        } try {
-            // Get current time based on position of mouse in the canvas box
-            oAudio.currentTime = oAudio.duration * (e.offsetX / canvas.clientWidth);
-        } catch (err) {
-            catcher(err);
-        }
-    }, true);*/
     progsive.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
         var progsive = document.getElementById('progsive');
