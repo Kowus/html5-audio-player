@@ -228,9 +228,7 @@ function handleKey(e) {
 
 
 function initEvents() {
-    // var canvas = document.getElementById('canvas');
     var oAudio = document.getElementById('myaudio');
-    // var canvas2 = document.getElementById('canvas2');
     var rateDisplay = document.getElementById("rate");
     var prog = document.getElementById("progress");
     var progsive = document.getElementById("progsive");
@@ -325,3 +323,10 @@ window.addEventListener("DOMContentLoaded", initEvents, false);
 function catcher(e) {
     if (window.console && console.error("Error: " + e));
 }
+
+/* 
+    Todo: 
+        * add slide/drag event to volume and progress
+        * toggle loop
+        * add JSON Playlist
+*/
