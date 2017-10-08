@@ -175,6 +175,11 @@ function handleKey(e) {
             restartAudio();
             e.preventDefault()
             break;
+        // s key
+        case 83:
+            stopAudio();
+            e.preventDefault()
+            break;
         default:
             console.log(e.keyCode);
             e.preventDefault();
