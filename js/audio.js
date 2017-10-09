@@ -263,6 +263,7 @@ function initEvents() {
 
     oAudio.addEventListener("play", function () {
         wasPlaying = true;
+        volumeBar();
     }, false);
 
     oAudio.addEventListener("pause", function () {
@@ -286,10 +287,22 @@ function initEvents() {
     oAudio.addEventListener("ended", function () {
         alert("The thing goes SKRRRAA");
     }, true);
-    oAudio.addEventListener("timeupdate", volumeBar, true);
-    oAudio.addEventListener("playing", volumeBar, true);
-    oAudio.addEventListener("paused", volumeBar, true);
+    // oAudio.addEventListener("timeupdate", volumeBar, true);
+    // oAudio.addEventListener("playing", volumeBar, true);
+    // oAudio.addEventListener("paused", volumeBar, true);
     oAudio.addEventListener("volumechange", volumeBar, true);
+
+    volbox.addEventListener("mousedown", function (e) {
+        var oAudio = document.getElementById('myaudio');
+        var volbox = document.getElementById('volbox');
+        if (!e) {
+            e = window.event;
+        } try {
+            oAudio.volume = (e.offsetY / volbox.offsetHeight)
+        } catch (err) {
+            catcher(err);
+        }
+    }, false);
 
     volbox.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');
@@ -301,7 +314,7 @@ function initEvents() {
         } catch (err) {
             catcher(err);
         }
-    });
+    }, false);
 
     progsive.addEventListener("click", function (e) {
         var oAudio = document.getElementById('myaudio');

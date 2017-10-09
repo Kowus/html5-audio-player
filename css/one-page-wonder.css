@@ -190,7 +190,3 @@ canvas
 #canvas2{
     margin-bottom: 35px;
 }
-
-progress[value] {
-    height: 20px;
-  }
