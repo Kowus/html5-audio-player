@@ -365,9 +365,7 @@ function initEvents() {
         }
 
     }, true);
-    // oAudio.addEventListener("timeupdate", volumeBar, true);
-    // oAudio.addEventListener("playing", volumeBar, true);
-    // oAudio.addEventListener("paused", volumeBar, true);
+
     oAudio.addEventListener("volumechange", volumeBar, true);
 
     volbox.addEventListener("input", function (e) {
