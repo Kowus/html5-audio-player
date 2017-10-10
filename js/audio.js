@@ -8,6 +8,10 @@ var playlist = [
         name: "Man's Not Hot",
         by: "Big Shaq",
         src: "mans-not-hot.mp3"
+    }, {
+        name: "Mercy",
+        by: "Darko Vibes",
+        src: "Mercy (Prod.by Vacs).mp3"
     }
 ];
 
@@ -450,5 +454,5 @@ function showPlaylist() {
         * add slide/drag event to volume and progress
         * toggle loop
         * add JSON Playlist [done]
-        * switch to track on click
+        * switch to track on click [done]
 */
