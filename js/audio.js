@@ -26,15 +26,25 @@ function progressBar() {
     prog.style.width = pWidth + "%"
     var elapsedShow = document.getElementById('elapsed');
     var hourstr = 0,
-        minutestr = 0, secondstr = 0;
+        minutestr = 0, secondstr = 0, durh = 0, durm = 0, durs = 0;
 
-    if (((oAudio.currentTime / 60) % 60) < 10) {
+    durs = Math.floor(oAudio.duration % 60);
+    durs = Number(durs) < 10 ? "0" + durs : durs;
+    durm = Math.floor((oAudio.duration / 60) % 60);
+    durm = Math.floor(durm) < 10 ? "0" + durm : durm;
+
+    if (Math.round((oAudio.currentTime / 60) % 59) < 10) {
         minutestr = `0${Math.floor((oAudio.currentTime / 60) % 60)}`;
     } else minutestr = Math.floor((oAudio.currentTime / 60) % 60)
-    if ((oAudio.currentTime % 60) < 10) {
+
+    // Build second string
+    if (Math.round(oAudio.currentTime % 60) < 10) {
         secondstr = `0${Math.round(oAudio.currentTime % 60)}`
+    } else if ((oAudio.currentTime % 60) > 59) {
+        secondstr = "00";
     } else secondstr = Math.round(oAudio.currentTime % 60)
     elapsedShow.innerHTML = `${minutestr}:${secondstr}`;
+    document.getElementById('duration').innerHTML = `${durm}:${durs}`;
 
 }
 function volumeBar() {
