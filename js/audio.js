@@ -365,7 +365,7 @@ function initEvents() {
             currentFile += 1;
             playAudio();
         } else {
-            alert("End of playlist!");
+            alert("Source code available at: https://github.com/Kowus/html5-audio-player");
         }
 
     }, true);
