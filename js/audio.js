@@ -413,7 +413,7 @@ function initEvents() {
                 e = window.event;
             } try {
                 var selected = Number(el.innerHTML.split('.')[0]) - 1;
-                if (selected != currentFile) {
+                if (selected !== currentFile) {
                     document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
                     el.classList.add('active');
                     currentFile = selected;
