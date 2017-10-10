@@ -405,10 +405,8 @@ function initEvents() {
                     document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
                     el.classList.add('active');
                     currentFile = selected;
-                    console.log(currentFile);
+                    playAudio();
                 }
-                // currentFile =
-                // alert(selected);
             } catch (err) {
                 catcher(err);
             }
