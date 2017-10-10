@@ -276,6 +276,11 @@ function handleKey(e) {
             nextSong();
             e.preventDefault();
             break;
+        // p key
+        case 80:
+            previousSong();
+            e.preventDefault();
+            break;
         default:
             console.log(e.keyCode);
             e.preventDefault();
