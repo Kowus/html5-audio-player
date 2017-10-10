@@ -35,18 +35,7 @@ function progressBar() {
         secondstr = `0${Math.round(oAudio.currentTime % 60)}`
     } else secondstr = Math.round(oAudio.currentTime % 60)
     elapsedShow.innerHTML = `${minutestr}:${secondstr}`;
-    /*
-    
-        if (canvas.getContext) {
-            var ctx = canvas.getContext("2d");
-            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            ctx.fillStyle = "rgb(255, 0, 0)";
-            var fWidth = (elapsedTime / oAudio.duration) * canvas.clientWidth;
-            if (fWidth > 0) {
-                ctx.fillRect(0, 0, fWidth, canvas.clientHeight);
-            }
-        }
-    */
+
 }
 function volumeBar() {
     var oAudio = document.getElementById('myaudio');
@@ -67,11 +56,6 @@ function playAudio() {
             var audioUrl = document.getElementById('audiofile');
 
             // Skip Load if current file hasn't changed
-            /*
-            if (audioUrl.value !== currentFile) {
-                oAudio.src = audioUrl.value;
-                currentFile = audioUrl.value;
-            }*/
             if (audioUrl.value !== playlist[currentFile].name) {
                 oAudio.src = playlist[currentFile].src
                 audioUrl.value = playlist[currentFile].name;
