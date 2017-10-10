@@ -184,9 +184,6 @@ canvas
     border-radius: 3px;
     padding:3px; 
 }
-#canvas{
-    height: 30px;
-}
-#canvas2{
-    margin-bottom: 35px;
+.btn{
+margin-top: 8px;
 }
