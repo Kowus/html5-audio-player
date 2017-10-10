@@ -201,7 +201,6 @@ function nextSong() {
     if (window.HTMLAudioElement) {
         try {
             if (currentFile >= 0 && currentFile < playlist.length - 1) {
-                oAudio.pause();
                 document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
                 currentFile += 1;
                 playAudio();
@@ -215,76 +214,88 @@ function nextSong() {
 }
 function previousSong() {
     var oAudio = document.getElementById('myaudio');
-    if (currentFile > 0) {
-        oAudio.pause();
-        document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
-        currentFile -= 1;
-        playAudio();
-    } else {
-        restartAudio();
+    if (window.HTMLAudioElement) {
+        try {
+            if (currentFile > 0) {
+                document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
+                currentFile -= 1;
+                playAudio();
+            } else {
+                restartAudio();
+            }
+        } catch (e) {
+            catcher(e);
+        }
     }
 }
 function handleKey(e) {
-    switch (e.keyCode) {
-        // Spacebar
-        case 32:
-            playAudio();
-            e.preventDefault();
-            break;
-        // Left Arrow
-        case 37:
-            rewindAudio();
-            e.preventDefault();
-            break;
-        // Right Arrow
-        case 39:
-            forwardAudio();
-            e.preventDefault();
-            break;
-        // Up Arrow
-        case 38:
-            increaseVolume();
-            e.preventDefault();
-            break;
-        // Down Arrow
-        case 40:
-            decreaseVolume();
-            e.preventDefault();
-            break;
-        // r key
-        case 82:
-            restartAudio();
-            e.preventDefault()
-            break;
-        // s key
-        case 83:
-            stopAudio();
-            e.preventDefault()
-            break;
-        // > key
-        case 190:
-            increaseSpeed();
-            e.preventDefault()
-            break;
-        // < key
-        case 188:
-            decreaseSpeed();
-            e.preventDefault()
-            break;
-        // n key
-        case 78:
-            nextSong();
-            e.preventDefault();
-            break;
-        // p key
-        case 80:
-            previousSong();
-            e.preventDefault();
-            break;
-        default:
-            console.log(e.keyCode);
-            e.preventDefault();
-            break;
+    if (!e) {
+        e = window.event;
+    }
+    try {
+        switch (e.keyCode) {
+            // Spacebar
+            case 32:
+                playAudio();
+                e.preventDefault();
+                break;
+            // Left Arrow
+            case 37:
+                rewindAudio();
+                e.preventDefault();
+                break;
+            // Right Arrow
+            case 39:
+                forwardAudio();
+                e.preventDefault();
+                break;
+            // Up Arrow
+            case 38:
+                increaseVolume();
+                e.preventDefault();
+                break;
+            // Down Arrow
+            case 40:
+                decreaseVolume();
+                e.preventDefault();
+                break;
+            // r key
+            case 82:
+                restartAudio();
+                e.preventDefault()
+                break;
+            // s key
+            case 83:
+                stopAudio();
+                e.preventDefault()
+                break;
+            // > key
+            case 190:
+                increaseSpeed();
+                e.preventDefault()
+                break;
+            // < key
+            case 188:
+                decreaseSpeed();
+                e.preventDefault()
+                break;
+            // n key
+            case 78:
+                nextSong();
+                e.preventDefault();
+                break;
+            // p key
+            case 80:
+                previousSong();
+                e.preventDefault();
+                break;
+            default:
+                console.log(e.keyCode);
+                e.preventDefault();
+                break;
+        }
+    } catch (err) {
+        catcher(err);
     }
 }
 
