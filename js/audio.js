@@ -66,6 +66,7 @@ function playAudio() {
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {
                 oAudio.src = playlist[currentFile].src;
+                document.getElementsByClassName('playlist-item')[currentFile].classList.add('active');
                 document.getElementById('by').innerHTML = playlist[currentFile].by;
                 audioUrl.value = playlist[currentFile].name;
             }
@@ -168,23 +169,62 @@ function increaseVolume() {
 }
 
 function increaseSpeed() {
-    var oAudio = document.getElementById('myaudio');
-    if (oAudio.playbackRate < 1) {
-        oAudio.playbackRate *= 2;
-    } else
-        oAudio.playbackRate += .5;
+    if (window.HTMLAudioElement) {
+        try {
+            var oAudio = document.getElementById('myaudio');
+            if (oAudio.playbackRate < 1) {
+                oAudio.playbackRate *= 2;
+            } else
+                oAudio.playbackRate += .5;
+        } catch (e) {
+            catcher(e);
+        }
+    }
 }
 
 function decreaseSpeed() {
     var oAudio = document.getElementById('myaudio');
-    if (oAudio.playbackRate <= 1) {
-        var temp = oAudio.playbackRate;
-        oAudio.playbackRate = (temp / 2);
-    } else {
-        oAudio.playbackRate -= .5;
+    if (window.HTMLAudioElement) {
+        try {
+            if (oAudio.playbackRate <= 1) {
+                var temp = oAudio.playbackRate;
+                oAudio.playbackRate = (temp / 2);
+            } else {
+                oAudio.playbackRate -= .5;
+            }
+        } catch (e) {
+            catcher(e)
+        }
     }
 }
-
+function nextSong() {
+    var oAudio = document.getElementById('myaudio');
+    if (window.HTMLAudioElement) {
+        try {
+            if (currentFile >= 0 && currentFile < playlist.length - 1) {
+                oAudio.pause();
+                document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
+                currentFile += 1;
+                playAudio();
+            } else {
+                alert("End of playlist!");
+            }
+        } catch (e) {
+            catcher(e);
+        }
+    }
+}
+function previousSong() {
+    var oAudio = document.getElementById('myaudio');
+    if (currentFile > 0) {
+        oAudio.pause();
+        document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
+        currentFile -= 1;
+        playAudio();
+    } else {
+        restartAudio();
+    }
+}
 function handleKey(e) {
     switch (e.keyCode) {
         // Spacebar
@@ -232,12 +272,16 @@ function handleKey(e) {
             decreaseSpeed();
             e.preventDefault()
             break;
+        // n key
+        case 78:
+            nextSong();
+            e.preventDefault();
+            break;
         default:
             console.log(e.keyCode);
             e.preventDefault();
             break;
     }
-
 }
 
 
@@ -297,6 +341,7 @@ function initEvents() {
     // update progress bar
     oAudio.addEventListener("timeupdate", progressBar, true);
     oAudio.addEventListener("ended", function () {
+        document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
         if (currentFile >= 0 && currentFile < playlist.length - 1) {
             currentFile += 1;
             playAudio();
@@ -364,6 +409,7 @@ function showPlaylist() {
     playlist.forEach((item, index, array) => {
         var kid = document.createElement("li");
         kid.classList.add('list-group-item');
+        kid.classList.add('playlist-item');
         kid.innerHTML = `${index + 1}. ${item.name} by ${item.by}`;
         theParent.appendChild(kid);
     });

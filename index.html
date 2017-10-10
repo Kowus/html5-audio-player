@@ -112,6 +112,20 @@
                     </kbd>
                 </p>
             </li>
+            <li class="list-group-item">
+                <p>Previous song
+                    <kbd class="pull-right">
+                        p
+                    </kbd>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <p>Next song
+                    <kbd class="pull-right">
+                        n
+                    </kbd>
+                </p>
+            </li>
             <li class="list-group-item text-center">
                 <h4>
                     Music will pause as soon as you leave the browser.
@@ -149,7 +163,9 @@
 
             <!-- Panel Body -->
             <div class="panel-body" id="panel-body">
-                <div style="width: 90%" class="pull-left">
+
+
+                <div style="width: 90%; height: 20vh;; overflow-y:scroll;" class="pull-left">
                     <ul class="list-group" id="playlist">
                     </ul>
                 </div>
@@ -188,8 +204,14 @@
                 <button onclick="decreaseSpeed()" class="btn btn-default" id="decrease">
                     <i class="glyphicon glyphicon-backward"></i>
                 </button>
+                <button onclick="previousSong()" class="btn btn-default" id="increase">
+                    <i class="glyphicon glyphicon-step-backward"></i>
+                </button>
                 <button onclick="restartAudio();" class="btn btn-default" id="restart">
                     Restart
+                </button>
+                <button onclick="nextSong()" class="btn btn-default" id="increase">
+                    <i class="glyphicon glyphicon-step-forward"></i>
                 </button>
                 <button onclick="increaseSpeed()" class="btn btn-default" id="increase">
                     <i class="glyphicon glyphicon-forward"></i>
