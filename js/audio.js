@@ -365,9 +365,8 @@ function initEvents() {
             currentFile += 1;
             playAudio();
         } else {
-            alert("Source code available at: https://github.com/Kowus/html5-audio-player");
+            alert("Source code available at: https://github.com/Kowus/html5-audio-player.git");
         }
-
     }, true);
 
     oAudio.addEventListener("volumechange", volumeBar, true);
