@@ -395,6 +395,25 @@ function initEvents() {
         }
     }, true);
 
+    [].forEach.call(document.getElementsByClassName('playlist-item'), function (el) {
+        el.addEventListener('click', function (e) {
+            if (!e) {
+                e = window.event;
+            } try {
+                var selected = Number(el.innerHTML.split('.')[0]) - 1;
+                if (selected != currentFile) {
+                    document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
+                    el.classList.add('active');
+                    currentFile = selected;
+                    console.log(currentFile);
+                }
+                // currentFile =
+                // alert(selected);
+            } catch (err) {
+                catcher(err);
+            }
+        })
+    })
 
 }
 
