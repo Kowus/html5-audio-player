@@ -11,11 +11,9 @@ var playlist = [
     }
 ];
 
-// var currentFile = "";
+
 var currentFile = 0;
 var volChg = .02;
-// var audioUrl = document.getElementById('audiofile');
-// audioUrl.value = playlist[currentFile].name;
 
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
@@ -67,7 +65,8 @@ function playAudio() {
 
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {
-                oAudio.src = playlist[currentFile].src
+                oAudio.src = playlist[currentFile].src;
+                document.getElementById('by').innerHTML = playlist[currentFile].by;
                 audioUrl.value = playlist[currentFile].name;
             }
             // Tests the paused attribute and set state.
@@ -243,6 +242,7 @@ function handleKey(e) {
 
 
 function initEvents() {
+    showPlaylist();
     var oAudio = document.getElementById('myaudio');
     var rateDisplay = document.getElementById("rate");
     var prog = document.getElementById("progress");
@@ -297,9 +297,11 @@ function initEvents() {
     // update progress bar
     oAudio.addEventListener("timeupdate", progressBar, true);
     oAudio.addEventListener("ended", function () {
-        if (currentFile >= 0 && currentFile <= playlist.length - 1) {
+        if (currentFile >= 0 && currentFile < playlist.length - 1) {
             currentFile += 1;
             playAudio();
+        } else {
+            alert("End of playlist!");
         }
 
     }, true);
@@ -356,9 +358,21 @@ function catcher(e) {
     if (window.console && console.error("Error: " + e));
 }
 
+
+function showPlaylist() {
+    var theParent = document.getElementById('playlist');
+    playlist.forEach((item, index, array) => {
+        var kid = document.createElement("li");
+        kid.classList.add('list-group-item');
+        kid.innerHTML = `${index + 1}. ${item.name} by ${item.by}`;
+        theParent.appendChild(kid);
+    });
+}
+
 /* 
     Todo: 
         * add slide/drag event to volume and progress
         * toggle loop
-        * add JSON Playlist
+        * add JSON Playlist [done]
+        * switch to track on click
 */

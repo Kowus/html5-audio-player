@@ -127,7 +127,7 @@
             <!-- Panel Heading -->
             <div class="panel-heading">
                 <div class="input-group">
-                    <input class="form-control" id="audiofile" size="80" placeholder="Current Track" readonly>
+                    <input class="form-control" id="audiofile" placeholder="Current Track" style="background-color:#fff;color:black;" disabled>
                     <span class="input-group-addon" style="background-color:white">
                         Volume:
                         <span class="badge bg-info" id="volume">100%
@@ -136,11 +136,23 @@
                         </span>
                     </span>
                 </div>
+                <div>
+                    <h4 class="text-left" style="color:#333;text-indent:10px;">
+
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span class="lead" id="by" style="font-weight:800;"></span>
+
+                        </p>
+                </div>
             </div>
             <!-- /Panel Heading -->
 
             <!-- Panel Body -->
-            <div class="panel-body text-center" id="panel-body">
+            <div class="panel-body" id="panel-body">
+                <div style="width: 90%" class="pull-left">
+                    <ul class="list-group" id="playlist">
+                    </ul>
+                </div>
 
 
                 <div class="progress pull-right" style="height: 150px; width: 20px; -ms-transform:rotate(180deg);-webkit-transform:rotate(180deg);transform:rotate(180deg)"
