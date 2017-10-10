@@ -20,7 +20,6 @@ function progressBar() {
     var elapsedTime = Math.round(oAudio.currentTime);
     var prog = document.getElementById("progress");
     var pWidth = (elapsedTime / oAudio.duration) * 100;
-    // prog.value = pWidth;
     prog.style.width = pWidth + "%"
     var elapsedShow = document.getElementById('elapsed');
     var hourstr = 0,
