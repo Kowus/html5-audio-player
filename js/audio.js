@@ -14,8 +14,8 @@ var playlist = [
 // var currentFile = "";
 var currentFile = 0;
 var volChg = .02;
-var audioUrl = document.getElementById('audiofile');
-audioUrl.value = playlist[currentFile].name;
+// var audioUrl = document.getElementById('audiofile');
+// audioUrl.value = playlist[currentFile].name;
 
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
@@ -25,9 +25,16 @@ function progressBar() {
     // prog.value = pWidth;
     prog.style.width = pWidth + "%"
     var elapsedShow = document.getElementById('elapsed');
+    var hourstr = 0,
+        minutestr = 0, secondstr = 0;
 
-    if (oAudio)
-        `${Math.floor((oAudio.currentTime / 60) % 60)}:${String((oAudio.currentTime % 60)).substr(0, 2)}`
+    if (((oAudio.currentTime / 60) % 60) < 10) {
+        minutestr = `0${Math.floor((oAudio.currentTime / 60) % 60)}`;
+    } else minutestr = Math.floor((oAudio.currentTime / 60) % 60)
+    if ((oAudio.currentTime % 60) < 10) {
+        secondstr = `0${Math.round(oAudio.currentTime % 60)}`
+    } else secondstr = Math.round(oAudio.currentTime % 60)
+    elapsedShow.innerHTML = `${minutestr}:${secondstr}`;
     /*
     
         if (canvas.getContext) {
@@ -65,11 +72,10 @@ function playAudio() {
                 oAudio.src = audioUrl.value;
                 currentFile = audioUrl.value;
             }*/
-            audioUrl.value = playlist[currentFile].name;
-            if (oAudio.src !== playlist[currentFile].src) {
-                oAudio.src = playlist[currentFile].src;
+            if (audioUrl.value !== playlist[currentFile].name) {
+                oAudio.src = playlist[currentFile].src
+                audioUrl.value = playlist[currentFile].name;
             }
-
             // Tests the paused attribute and set state.
             if (oAudio.paused) {
                 oAudio.play();
