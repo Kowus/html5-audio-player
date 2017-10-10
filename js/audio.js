@@ -24,7 +24,10 @@ function progressBar() {
     var pWidth = (elapsedTime / oAudio.duration) * 100;
     // prog.value = pWidth;
     prog.style.width = pWidth + "%"
+    var elapsedShow = document.getElementById('elapsed');
 
+    if (oAudio)
+        `${Math.floor((oAudio.currentTime / 60) % 60)}:${String((oAudio.currentTime % 60)).substr(0, 2)}`
     /*
     
         if (canvas.getContext) {
@@ -45,19 +48,7 @@ function volumeBar() {
     var currVol = Math.round(oAudio.volume * 100) + "%";
     volbar.style.height = currVol;
     disVol.innerHTML = currVol;
-    // console.log(oAudio.volume);
-    /*
-        var canvas2 = document.getElementById("canvas2");
-        if (canvas2.getContext) {
-            var ctx2 = canvas2.getContext('2d');
-            ctx2.clearRect(0, 0, canvas2.clientWidth, canvas2.clientHeight);
-            ctx2.fillStyle = "rgb(200, 10, 84)";
-            var vol = Math.round(100 - ((oAudio.volume / 1) * (1 / canvas2.clientHeight)) * 10000) - 5;
-            if (vol > 0) {
-                ctx2.fillRect(0, vol, canvas2.clientWidth, canvas2.clientHeight);
-            }
-        }
-    */
+
 }
 
 function playAudio() {
