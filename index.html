@@ -124,9 +124,10 @@
         <hr class="featurette-divider">
 
         <div class="panel panel-warning" id="media-panel">
+            <!-- Panel Heading -->
             <div class="panel-heading">
                 <div class="input-group">
-                    <input class="form-control" id="audiofile" size="80" value="mans-not-hot.mp3" readonly>
+                    <input class="form-control" id="audiofile" size="80" placeholder="Current Track" readonly>
                     <span class="input-group-addon" style="background-color:white">
                         Volume:
                         <span class="badge bg-info" id="volume">100%
@@ -135,8 +136,10 @@
                         </span>
                     </span>
                 </div>
-
             </div>
+            <!-- /Panel Heading -->
+
+            <!-- Panel Body -->
             <div class="panel-body text-center" id="panel-body">
 
 
@@ -146,10 +149,15 @@
                         id="volbar">
                     </div>
                 </div>
-
-
             </div>
+            <!-- /Panel Body -->
+
+            <!-- Panle Footer -->
             <div class="panel-footer text-center" style="background-color:#31708f">
+                <div class="controls" style="color:white">
+                    <small class="pull-left" id="elapsed" style="margin:auto 5px">0:00</small>
+                    <small class="pull-right" id="duration" style="margin:auto 5px">-:--</small>
+                </div>
                 <div class="progress" id="progsive">
                     <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0; z-index:99999999; "
                         id="progress">

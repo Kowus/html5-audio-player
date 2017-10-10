@@ -1,5 +1,21 @@
-var currentFile = "";
+var playlist = [
+    {
+        name: "Pt. 2",
+        by: "Kanye West",
+        src: "03 Pt. 2.mp3"
+    },
+    {
+        name: "Man's Not Hot",
+        by: "Big Shaq",
+        src: "mans-not-hot.mp3"
+    }
+];
+
+// var currentFile = "";
+var currentFile = 0;
 var volChg = .02;
+var audioUrl = document.getElementById('audiofile');
+audioUrl.value = playlist[currentFile].name;
 
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
@@ -53,9 +69,14 @@ function playAudio() {
             var audioUrl = document.getElementById('audiofile');
 
             // Skip Load if current file hasn't changed
+            /*
             if (audioUrl.value !== currentFile) {
                 oAudio.src = audioUrl.value;
                 currentFile = audioUrl.value;
+            }*/
+            audioUrl.value = playlist[currentFile].name;
+            if (oAudio.src !== playlist[currentFile].src) {
+                oAudio.src = playlist[currentFile].src;
             }
 
             // Tests the paused attribute and set state.
@@ -285,14 +306,18 @@ function initEvents() {
     // update progress bar
     oAudio.addEventListener("timeupdate", progressBar, true);
     oAudio.addEventListener("ended", function () {
-        alert("The thing goes SKRRRAA");
+        if (currentFile >= 0 && currentFile <= playlist.length - 1) {
+            currentFile += 1;
+            playAudio();
+        }
+
     }, true);
     // oAudio.addEventListener("timeupdate", volumeBar, true);
     // oAudio.addEventListener("playing", volumeBar, true);
     // oAudio.addEventListener("paused", volumeBar, true);
     oAudio.addEventListener("volumechange", volumeBar, true);
 
-    volbox.addEventListener("mousedown", function (e) {
+    volbox.addEventListener("input", function (e) {
         var oAudio = document.getElementById('myaudio');
         var volbox = document.getElementById('volbox');
         if (!e) {
