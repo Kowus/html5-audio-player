@@ -72,6 +72,7 @@ function playAudio() {
             var panelBody = document.getElementById('panel-body');
 
             panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
+            panelBody.style.backgroundPosition= "center";
 
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {
