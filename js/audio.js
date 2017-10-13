@@ -84,7 +84,9 @@ function playAudio() {
                 panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
                 document.getElementById('panel-heading').style.backgroundColor="rgba(252, 248, 227, 0.2)";
                 document.getElementById('panel-heading').style.border="none";
-                document.getElementById('panel-footer').style.backgroundColor="rgba(49, 112, 143, 0.9)";
+                document.getElementById('panel-footer').style.border="none";
+                // document.getElementById('panel-footer').style.backgroundColor="rgba(49, 112, 143, 0.8)";
+                document.getElementById('panel-footer').style.backgroundColor="rgba(0, 0, 0, 0.6)";
             }
             // Tests the paused attribute and set state.
             if (oAudio.paused) {
