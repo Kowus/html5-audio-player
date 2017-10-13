@@ -2,16 +2,20 @@ var playlist = [
     {
         name: "Pt. 2",
         by: "Kanye West",
-        src: "audio/03 Pt. 2.mp3"
+        src: "audio/03 Pt. 2.mp3",
+        img: "img/pt2.jpg"
+
     },
     {
         name: "Man's Not Hot",
         by: "Big Shaq",
-        src: "audio/mans-not-hot.mp3"
+        src: "audio/mans-not-hot.mp3",
+        img: "img/mans-not-hot.jpg"
     }, {
         name: "Mercy",
         by: "Darko Vibes",
-        src: "audio/Mercy (Prod.by Vacs).mp3"
+        src: "audio/Mercy (Prod.by Vacs).mp3",
+        img: "img/mercy.jpg"
     }
 ];
 
@@ -24,7 +28,7 @@ function progressBar() {
     var elapsedTime = Math.round(oAudio.currentTime);
     var prog = document.getElementById("progress");
     var pWidth = (elapsedTime / oAudio.duration) * 100;
-    prog.style.width = pWidth + "%"
+    prog.style.width = pWidth + "%";
     var elapsedShow = document.getElementById('elapsed');
     var hourstr = 0,
         minutestr = 0, secondstr = 0, durh = 0, durm = 0, durs = 0;
@@ -65,6 +69,9 @@ function playAudio() {
             var oAudio = document.getElementById('myaudio');
             var btn = document.getElementById('play');
             var audioUrl = document.getElementById('audiofile');
+            var panelBody = document.getElementById('panel-body');
+
+            panelBody.style.backgroundImage =playlist[currentFile].img
 
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {
@@ -311,6 +318,10 @@ function initEvents() {
     var prog = document.getElementById("progress");
     var progsive = document.getElementById("progsive");
     var volbox = document.getElementById('volbox');
+    var audioUrl = document.getElementById('audiofile');
+
+    audioUrl.placeholder=playlist[currentFile].name;
+    document.getElementById('by').innerHTML = playlist[currentFile].by;
 
     // oAudio.loop = true;
 
