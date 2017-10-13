@@ -69,9 +69,9 @@ function playAudio() {
             var oAudio = document.getElementById('myaudio');
             var btn = document.getElementById('play');
             var audioUrl = document.getElementById('audiofile');
-            var panelBody = document.getElementById('bg');
+            var panelBody = document.getElementById('panel-body');
 
-            panelBody.style.backgroundImage =playlist[currentFile].img;
+            panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
 
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {
