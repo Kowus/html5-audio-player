@@ -69,10 +69,12 @@ function playAudio() {
             var oAudio = document.getElementById('myaudio');
             var btn = document.getElementById('play');
             var audioUrl = document.getElementById('audiofile');
-            var panelBody = document.getElementById('panel-body');
+            var panelBody = document.getElementById('media-panel');
 
             panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
-            panelBody.style.backgroundPosition= "center";
+            document.getElementById('panel-heading').style.backgroundColor="transparent";
+
+            // panelBody.style.backgroundPosition= "center";
 
             // Skip Load if current file hasn't changed
             if (audioUrl.value !== playlist[currentFile].name) {

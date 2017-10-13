@@ -179,6 +179,13 @@ footer {
 .btn{
 margin-top: 8px;
 }
-#panel-body{
-    background-color: transparent;
+#media-panel{
+    background-position: center;
 }
+
+.playlist-item{
+    background-color: rgba(255,255,255,.5);
+}
+
+
+
