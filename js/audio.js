@@ -72,7 +72,8 @@ function playAudio() {
             var panelBody = document.getElementById('media-panel');
 
             panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
-            document.getElementById('panel-heading').style.backgroundColor="transparent";
+            document.getElementById('panel-heading').style.backgroundColor="rgba(252, 248, 227, 0.2)";
+            document.getElementById('panel-heading').style.border="none";
 
             // panelBody.style.backgroundPosition= "center";
 
