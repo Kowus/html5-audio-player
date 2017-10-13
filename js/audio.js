@@ -40,14 +40,14 @@ function progressBar() {
 
     if (Math.round((oAudio.currentTime / 60) % 59) < 10) {
         minutestr = `0${Math.floor((oAudio.currentTime / 60) % 60)}`;
-    } else minutestr = Math.floor((oAudio.currentTime / 60) % 60)
+    } else minutestr = Math.floor((oAudio.currentTime / 60) % 60);
 
     // Build second string
     if (Math.round(oAudio.currentTime % 60) < 10) {
         secondstr = `0${Math.round(oAudio.currentTime % 60)}`
     } else if ((oAudio.currentTime % 60) > 59) {
         secondstr = "00";
-    } else secondstr = Math.round(oAudio.currentTime % 60)
+    } else secondstr = Math.round(oAudio.currentTime % 60);
     elapsedShow.innerHTML = `${minutestr}:${secondstr}`;
     document.getElementById('duration').innerHTML = `${durm}:${durs}`;
 
