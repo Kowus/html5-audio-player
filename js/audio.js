@@ -2,16 +2,16 @@ var playlist = [
     {
         name: "Pt. 2",
         by: "Kanye West",
-        src: "03 Pt. 2.mp3"
+        src: "audio/03 Pt. 2.mp3"
     },
     {
         name: "Man's Not Hot",
         by: "Big Shaq",
-        src: "mans-not-hot.mp3"
+        src: "audio/mans-not-hot.mp3"
     }, {
         name: "Mercy",
         by: "Darko Vibes",
-        src: "Mercy (Prod.by Vacs).mp3"
+        src: "audio/Mercy (Prod.by Vacs).mp3"
     }
 ];
 
