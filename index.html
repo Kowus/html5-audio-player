@@ -159,7 +159,7 @@
             <!-- /Panel Heading -->
 
             <!-- Panel Body -->
-            <div class="panel-body" id="panel-body">
+            <div class="panel-body" id="panel-body" style="background-image: url('img/mans-not-hot.jpg');">
 
 
                 <div style="width: 90%; height: 20vh; overflow-y:scroll;" class="pull-left">
@@ -201,13 +201,13 @@
                 <button onclick="decreaseSpeed()" class="btn btn-default" id="decrease">
                     <i class="glyphicon glyphicon-backward"></i>
                 </button>
-                <button onclick="previousSong()" class="btn btn-default" id="increase">
+                <button onclick="previousSong()" class="btn btn-default" id="previous">
                     <i class="glyphicon glyphicon-step-backward"></i>
                 </button>
                 <button onclick="restartAudio();" class="btn btn-default" id="restart">
                     Restart
                 </button>
-                <button onclick="nextSong()" class="btn btn-default" id="increase">
+                <button onclick="nextSong()" class="btn btn-default" id="next">
                     <i class="glyphicon glyphicon-step-forward"></i>
                 </button>
                 <button onclick="increaseSpeed()" class="btn btn-default" id="increase">
@@ -241,6 +241,8 @@
             document.getElementById("forward").disabled = false;
             document.getElementById("restart").disabled = false;
             document.getElementById("increase").disabled = false;
+            document.getElementById("previous").disabled = false;
+            document.getElementById("next").disabled = false
         }
     </script>
     <script src="js/jquery.js"></script>
