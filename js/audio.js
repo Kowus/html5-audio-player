@@ -226,7 +226,13 @@ function nextSong() {
                 currentFile += 1;
                 playAudio();
             } else {
-                alert("End of playlist!");
+                if(loop===1) {
+                    currentFile =0;
+                    playAudio();
+                }
+                else {
+                    alert("End of playlist!");
+                }
             }
         } catch (e) {
             catcher(e);
