@@ -22,6 +22,7 @@ var playlist = [
 
 var currentFile = 0;
 var volChg = .02;
+var loop = 0;
 
 function progressBar() {
     var oAudio = document.getElementById('myaudio');
@@ -52,6 +53,7 @@ function progressBar() {
     document.getElementById('duration').innerHTML = `${durm}:${durs}`;
 
 }
+
 function volumeBar() {
     var oAudio = document.getElementById('myaudio');
     var disVol = document.getElementById('volume');
@@ -72,7 +74,6 @@ function playAudio() {
             var panelBody = document.getElementById('media-panel');
 
 
-
             // panelBody.style.backgroundPosition= "center";
 
             // Skip Load if current file hasn't changed
@@ -82,11 +83,11 @@ function playAudio() {
                 document.getElementById('by').innerHTML = playlist[currentFile].by;
                 audioUrl.value = playlist[currentFile].name;
                 panelBody.style.backgroundImage = `url(${playlist[currentFile].img})`;
-                document.getElementById('panel-heading').style.backgroundColor="rgba(252, 248, 227, 0.2)";
-                document.getElementById('panel-heading').style.border="none";
-                document.getElementById('panel-footer').style.border="none";
+                document.getElementById('panel-heading').style.backgroundColor = "rgba(252, 248, 227, 0.2)";
+                document.getElementById('panel-heading').style.border = "none";
+                document.getElementById('panel-footer').style.border = "none";
                 // document.getElementById('panel-footer').style.backgroundColor="rgba(49, 112, 143, 0.8)";
-                document.getElementById('panel-footer').style.backgroundColor="rgba(0, 0, 0, 0.6)";
+                document.getElementById('panel-footer').style.backgroundColor = "rgba(0, 0, 0, 0.6)";
             }
             // Tests the paused attribute and set state.
             if (oAudio.paused) {
@@ -215,6 +216,7 @@ function decreaseSpeed() {
         }
     }
 }
+
 function nextSong() {
     var oAudio = document.getElementById('myaudio');
     if (window.HTMLAudioElement) {
@@ -231,6 +233,7 @@ function nextSong() {
         }
     }
 }
+
 function previousSong() {
     var oAudio = document.getElementById('myaudio');
     if (window.HTMLAudioElement) {
@@ -247,6 +250,33 @@ function previousSong() {
         }
     }
 }
+
+function handleLoop() {
+    var loopControl = document.getElementById('repeat');
+    var loopMode = loopControl.innerHTML;
+    var oAudio = document.getElementById('myaudio');
+    if (window.HTMLAudioElement) {
+        try {
+            if (loopMode === '<i class="glyphicon glyphicon-arrow-right"></i>') {
+                loop = 1;
+                oAudio.loop = false;
+                loopControl.innerHTML = '<i class="glyphicon glyphicon-repeat"></i>';
+            } else if (loopMode === '<i class="glyphicon glyphicon-repeat"></i>') {
+                loop = 2;
+                oAudio.loop = true;
+                loopControl.innerHTML = '<i class="glyphicon glyphicon-repeat"><sup>1</sup></i>'
+            } else {
+                oAudio.loop = false;
+                loop = 0;
+                loopControl.innerHTML = '<i class="glyphicon glyphicon-arrow-right"></i>'
+            }
+        }
+        catch (e){
+            catcher(e);
+        }
+    }
+}
+
 function handleKey(e) {
     if (!e) {
         e = window.event;
@@ -320,10 +350,11 @@ function handleKey(e) {
 
 
 function initEvents() {
-    if (WURFL.is_mobile === true){
+
+    if (WURFL.is_mobile === true) {
         document.getElementById('keymap').style.display = 'none';
 
-    }else {
+    } else {
         document.getElementById('source-code').style.display = 'none';
     }
     showPlaylist();
@@ -334,7 +365,7 @@ function initEvents() {
     var volbox = document.getElementById('volbox');
     var audioUrl = document.getElementById('audiofile');
 
-    audioUrl.placeholder=playlist[currentFile].name;
+    audioUrl.placeholder = playlist[currentFile].name;
     document.getElementById('by').innerHTML = playlist[currentFile].by;
 
     // oAudio.loop = true;
@@ -389,9 +420,11 @@ function initEvents() {
         if (currentFile >= 0 && currentFile < playlist.length - 1) {
             currentFile += 1;
             playAudio();
-        } else {
-            alert("Source code available at: https://github.com/Kowus/html5-audio-player.git");
+        } else if (currentFile >= playlist.length - 1 && loop === 1) {
+            currentFile = 0;
+            playAudio();
         }
+
     }, true);
 
     oAudio.addEventListener("volumechange", volumeBar, true);
@@ -401,7 +434,8 @@ function initEvents() {
         var volbox = document.getElementById('volbox');
         if (!e) {
             e = window.event;
-        } try {
+        }
+        try {
             oAudio.volume = (e.offsetY / volbox.offsetHeight)
         } catch (err) {
             catcher(err);
@@ -413,7 +447,8 @@ function initEvents() {
         var volbox = document.getElementById('volbox');
         if (!e) {
             e = window.event;
-        } try {
+        }
+        try {
             oAudio.volume = (e.offsetY / volbox.offsetHeight)
         } catch (err) {
             catcher(err);
@@ -425,7 +460,8 @@ function initEvents() {
         var progsive = document.getElementById('progsive');
         if (!e) {
             e = window.event;
-        } try {
+        }
+        try {
             oAudio.currentTime = oAudio.duration * (e.offsetX / progsive.offsetWidth)
         } catch (err) {
             catcher(err);
@@ -436,7 +472,8 @@ function initEvents() {
         el.addEventListener('click', function (e) {
             if (!e) {
                 e = window.event;
-            } try {
+            }
+            try {
                 var selected = Number(el.innerHTML.split('.')[0]) - 1;
                 if (selected !== currentFile) {
                     document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
@@ -455,10 +492,8 @@ function initEvents() {
 window.addEventListener("DOMContentLoaded", initEvents, false);
 
 
-
-
 function catcher(e) {
-    if (window.console && console.error("Error: " + e));
+    if (window.console && console.error("Error: " + e)) ;
 }
 
 
