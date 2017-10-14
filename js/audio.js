@@ -345,7 +345,7 @@ function handleKey(e) {
                 previousSong();
                 e.preventDefault();
                 break;
-            //    l key
+            // l key
             case 76:
                 handleLoop();
                 e.preventDefault();
