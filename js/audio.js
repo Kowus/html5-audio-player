@@ -227,6 +227,7 @@ function nextSong() {
                 playAudio();
             } else {
                 if(loop===1) {
+                    document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
                     currentFile =0;
                     playAudio();
                 }
@@ -356,13 +357,13 @@ function handleKey(e) {
 
 
 function initEvents() {
-
+/*
     if (WURFL.is_mobile === true) {
         document.getElementById('keymap').style.display = 'none';
 
     } else {
         document.getElementById('source-code').style.display = 'none';
-    }
+    }*/
     showPlaylist();
     var oAudio = document.getElementById('myaudio');
     var rateDisplay = document.getElementById("rate");
