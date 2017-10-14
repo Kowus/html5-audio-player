@@ -349,6 +349,7 @@ function handleKey(e) {
             case 76:
                 handleLoop();
                 e.preventDefault();
+                break;
             default:
                 console.log(e.keyCode);
                 e.preventDefault();
@@ -361,12 +362,13 @@ function handleKey(e) {
 
 
 function initEvents() {
+    /*
     if (WURFL.is_mobile === true) {
         document.getElementById('keymap').style.display = 'none';
 
     } else {
         document.getElementById('source-code').style.display = 'none';
-    }
+    }*/
     showPlaylist();
     var oAudio = document.getElementById('myaudio');
     var rateDisplay = document.getElementById("rate");
