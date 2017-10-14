@@ -318,22 +318,22 @@ function handleKey(e) {
             // r key
             case 82:
                 restartAudio();
-                e.preventDefault()
+                e.preventDefault();
                 break;
             // s key
             case 83:
                 stopAudio();
-                e.preventDefault()
+                e.preventDefault();
                 break;
             // > key
             case 190:
                 increaseSpeed();
-                e.preventDefault()
+                e.preventDefault();
                 break;
             // < key
             case 188:
                 decreaseSpeed();
-                e.preventDefault()
+                e.preventDefault();
                 break;
             // n key
             case 78:
@@ -345,6 +345,10 @@ function handleKey(e) {
                 previousSong();
                 e.preventDefault();
                 break;
+            //    l key
+            case 76:
+                handleLoop();
+                e.preventDefault();
             default:
                 console.log(e.keyCode);
                 e.preventDefault();
