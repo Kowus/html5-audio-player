@@ -226,9 +226,9 @@ function nextSong() {
                 currentFile += 1;
                 playAudio();
             } else {
-                if(loop===1) {
+                if (loop === 1) {
                     document.getElementsByClassName('playlist-item')[currentFile].classList.remove('active');
-                    currentFile =0;
+                    currentFile = 0;
                     playAudio();
                 }
                 else {
@@ -278,7 +278,7 @@ function handleLoop() {
                 loopControl.innerHTML = '<i class="glyphicon glyphicon-arrow-right"></i>'
             }
         }
-        catch (e){
+        catch (e) {
             catcher(e);
         }
     }
@@ -362,13 +362,12 @@ function handleKey(e) {
 
 
 function initEvents() {
-    /*
     if (WURFL.is_mobile === true) {
         document.getElementById('keymap').style.display = 'none';
 
     } else {
         document.getElementById('source-code').style.display = 'none';
-    }*/
+    }
     showPlaylist();
     var oAudio = document.getElementById('myaudio');
     var rateDisplay = document.getElementById("rate");
