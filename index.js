@@ -25,10 +25,25 @@
     }
     play() {
       var audioPlayer = this.domAudio;
-      if (!this.playlist && !this.supportsAudio) return;
+      if (!this.playlist && !this.supportsAudio) {console.debug("Nothing to play");return;}
+      console.debug("Playing...");
+      this.domAudio.src = this.playlist[0].src;
+      this.domAudio.title = this.playlist[0].title;
     }
-    updatePlaylist() {
-      
+    updatePlaylist(playlistPayload) {
+      /** 
+        * playlistPayload takes an action field which defaults to set
+        * it also supports insertion at position and removing from a position
+      */
+      var myAudioObject = this;
+      const updateOptions = {
+        set(playlist){
+          myAudioObject.playlist = playlist
+        } 
+      }
+      if(!playlistPayload.action){
+       updateOptions.set(playlistPayload.content)
+      }
     }
   }
 
