@@ -3,9 +3,7 @@
     constructor(config) {
       if (!window.HTMLAudioElement) {
         console.debug('your browser does not support html5 audio');
-        this.supportsAudio = false;
       } else {
-        this.supportsAudio = true;
         console.debug('browser supports html5 audio');
       }
       this.selector = config.selector;
@@ -23,12 +21,22 @@
       var audioPlayer = document.getElementById(selector);
       this.domAudio = audioPlayer;
     }
-    play() {
+    play(index) {
       var audioPlayer = this.domAudio;
-      if (!this.playlist && !this.supportsAudio) {console.debug("Nothing to play");return;}
-      console.debug("Playing...");
-      this.domAudio.src = this.playlist[0].src;
-      this.domAudio.title = this.playlist[0].title;
+      if(window.HTMLAudioElement){
+        try {
+      if (!this.playlist) {console.debug("Nothing to play");return;}
+      console.debug("Triggered play...");
+      if(this.nowPlaying !== this.playlist[index].title){
+        this.nowPlaying = this.playlist[index].title
+        audioPlayer.src = this.playlist[index].src;
+      }
+      if(audioPlayer.paused) return audioPlayer.play()
+      return audioPlayer.pause()
+      } catch(e){
+        console.error(e)
+      }
+      }
     }
     updatePlaylist(playlistPayload) {
       /** 
