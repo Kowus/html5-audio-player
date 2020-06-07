@@ -1,0 +1,19 @@
+{
+  "name": "html5-audio-player",
+  "version": "1.0.0",
+  "description": "An html5 plugin for audio playback management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kowus/html5-audio-player.git"
+  },
+  "author": "Barnabas Nomo <barnabasnomo@gmail.com> (https://barnabasnomo.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kowus/html5-audio-player/issues"
+  },
+  "homepage": "https://github.com/Kowus/html5-audio-player#readme"
+}
