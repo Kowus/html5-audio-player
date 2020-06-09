@@ -18,11 +18,11 @@
 
     init() {
       const selector = this.selector;
-      var audioPlayer = document.getElementById(selector);
+      const audioPlayer = document.getElementById(selector);
       this.domAudio = audioPlayer;
     }
     play(index) {
-      var audioPlayer = this.domAudio;
+      const audioPlayer = this.domAudio;
       if (window.HTMLAudioElement) {
         try {
           if (!this.playlist) {
@@ -42,7 +42,7 @@
       }
     }
     pause() {
-      var audioPlayer = this.domAudio;
+      const audioPlayer = this.domAudio;
       if (window.HTMLAudioElement) {
         try {
           if (audioPlayer.paused) return console.log('Already paused');
@@ -52,6 +52,18 @@
         }
       }
     }
+    stop() {
+      const audioPlayer = this.domAudio;
+      if (window.HTMLAudioElement) {
+        try {
+          audioPlayer.currentTime = 0;
+          audioPlayer.pause();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
     updatePlaylist(playlistPayload) {
       /**
        * playlistPayload takes an action field which defaults to set
