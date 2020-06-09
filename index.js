@@ -63,7 +63,23 @@
         }
       }
     }
-
+    changeVolume(value) {
+      const audioPlayer = this.domAudio;
+      if (window.HTMLAudioElement) {
+        try {
+          const volUpdate = Number(value);
+          if (volUpdate < 0) {
+            if (audioPlayer.volume < volUpdate) return (audioPlayer.volume = 0);
+          } else {
+            if (audioPlayer.volume > 1 - volUpdate)
+              return (this.domAudio.volume = 1);
+          }
+          return (this.domAudio.volume += volUpdate);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
     updatePlaylist(playlistPayload) {
       /**
        * playlistPayload takes an action field which defaults to set
