@@ -1,4 +1,4 @@
-(function() {
+(function () {
   class AudioPlayer {
     constructor(config) {
       if (!window.HTMLAudioElement) {
@@ -41,6 +41,17 @@
         }
       }
     }
+    pause() {
+      var audioPlayer = this.domAudio;
+      if (window.HTMLAudioElement) {
+        try {
+          if (audioPlayer.paused) return console.log('Already paused');
+          return audioPlayer.pause();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
     updatePlaylist(playlistPayload) {
       /**
        * playlistPayload takes an action field which defaults to set
@@ -62,7 +73,7 @@
             console.log('add to playlist failed, reset instead');
             myAudioObject.playlist = playlist;
           }
-        }
+        },
       };
       if (!playlistPayload.action) {
         return updateOptions.set(playlistPayload.content);
