@@ -72,9 +72,9 @@
             if (audioPlayer.volume < volUpdate) return (audioPlayer.volume = 0);
           } else {
             if (audioPlayer.volume > 1 - volUpdate)
-              return (this.domAudio.volume = 1);
+              return (audioPlayer.volume = 1);
           }
-          return (this.domAudio.volume += volUpdate);
+          return (audioPlayer.volume += volUpdate);
         } catch (e) {
           console.error(e);
         }
@@ -98,8 +98,7 @@
             else plst = Array.of(playlist);
             myAudioObject.playlist.splice(index, 0, plst);
           } catch (e) {
-            console.log('add to playlist failed, reset instead');
-            myAudioObject.playlist = playlist;
+            console.log('add to playlist failed, use set() instead');
           }
         },
       };
@@ -107,6 +106,12 @@
         return updateOptions.set(playlistPayload.content);
       }
       return updateOptions[playlistPayload.action](playlistPayload.payload);
+    }
+    attachEvent(type, listener, optionsCapture) {
+      this.domAudio.addEventListener(type, listener, optionsCapture);
+    }
+    removeEvent(type) {
+      this.domAudio.removeEventListener(type, listener, optionsCapture);
     }
   }
 
