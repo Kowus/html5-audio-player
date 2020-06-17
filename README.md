@@ -2,6 +2,8 @@
 
 ## An html5 audio player module
 
+This module is still under construction.
+
 ### Installation
 
 ### Getting Started
