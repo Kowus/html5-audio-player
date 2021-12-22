@@ -4,7 +4,7 @@
       // IE support
       if (!window.HTMLAudioElement) {
         console.debug('your browser does not support html5 audio');
-        alert("this feature is not available on your device")
+        alert('this feature is not available on your device');
       } else {
         console.debug('browser supports html5 audio');
       }
@@ -40,7 +40,7 @@
             audioPlayer.src = this.playlist[idx].src;
           }
           if (audioPlayer.paused) return audioPlayer.play();
-          
+
           return audioPlayer.pause();
         } catch (e) {
           console.error(e);
@@ -87,19 +87,27 @@
       }
     }
 
-    rewindAudio() { 
+    rewindAudio() {
       const audioPlayer = this.domAudio;
       if (window.HTMLAudioElement) {
         try {
           audioPlayer.currentTime -= this.backwardDuration;
-        }
-        catch (e) {
+        } catch (e) {
           console.error(e);
         }
       }
     }
-    
-    
+    forwardAudio() {
+      const audioPlayer = this.domAudio;
+      if (window.HTMLAudioElement) {
+        try {
+          audioPlayer.currentTime += this.forwardDuration;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
     updatePlaylist(playlistPayload) {
       /**
        * playlistPayload takes an action field which defaults to set
