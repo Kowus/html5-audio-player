@@ -1,8 +1,10 @@
 (function () {
   class AudioPlayer {
     constructor(config) {
+      // IE support
       if (!window.HTMLAudioElement) {
         console.debug('your browser does not support html5 audio');
+        alert("this feature is not available on your device")
       } else {
         console.debug('browser supports html5 audio');
       }
@@ -10,6 +12,8 @@
       this.keyBindings = config.keyBindings;
       this.playlist = config.playlist || [];
       this.nowPlaying = config.nowPlaying;
+      this.forwardDuration = config.forwardDuration || 5;
+      this.backwardDuration = config.backwardDuration || 5;
     }
 
     get getAudioPlayerInstance() {
@@ -22,6 +26,7 @@
       this.domAudio = audioPlayer;
     }
     play(index) {
+      var idx = index || 0;
       const audioPlayer = this.domAudio;
       if (window.HTMLAudioElement) {
         try {
@@ -30,11 +35,12 @@
             return;
           }
           console.debug('Triggered play...');
-          if (this.nowPlaying !== this.playlist[index].title) {
-            this.nowPlaying = this.playlist[index].title;
-            audioPlayer.src = this.playlist[index].src;
+          if (this.nowPlaying !== this.playlist[idx].title) {
+            this.nowPlaying = this.playlist[idx].title;
+            audioPlayer.src = this.playlist[idx].src;
           }
           if (audioPlayer.paused) return audioPlayer.play();
+          
           return audioPlayer.pause();
         } catch (e) {
           console.error(e);
@@ -80,6 +86,20 @@
         }
       }
     }
+
+    rewindAudio() { 
+      const audioPlayer = this.domAudio;
+      if (window.HTMLAudioElement) {
+        try {
+          audioPlayer.currentTime -= this.backwardDuration;
+        }
+        catch (e) {
+          console.error(e);
+        }
+      }
+    }
+    
+    
     updatePlaylist(playlistPayload) {
       /**
        * playlistPayload takes an action field which defaults to set
@@ -103,7 +123,7 @@
         },
       };
       if (!playlistPayload.action) {
-        return updateOptions.set(playlistPayload.content);
+        return updateOptions.set(playlistPayload.payload);
       }
       return updateOptions[playlistPayload.action](playlistPayload.payload);
     }
